@@ -861,4 +861,4 @@ async def on_app_command_error(interaction, error):
         await interaction.response.send_message(f'Произошла ошибка: {error}', ephemeral=True)
 
 # Запуск бота
-bot.run('MTM2Mjk3NDIxNzAzMjgzMTA4OA.GAgdYC.i_CU7O2QELG1VTJbRF6p00ami9XS8rnSSKpt4k')  # Замените на токен вашего бота
+bot.run('YOUR-TOKEN-HERE')  # Замените на токен вашего бота
