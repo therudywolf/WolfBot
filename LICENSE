@@ -1,0 +1,36 @@
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (C) 2025 therudywolf
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+========================================================================
+
+ADDITIONAL TERMS
+
+If you modify this program, you must mark it clearly as modified so
+that the original authors are not confused with modified versions.
+You must also make the source code of any modified versions available
+to users under these same terms.
+
+If this program is deployed on a network server and end users interact
+with it remotely, you must provide a way for them to obtain the source
+code. One practical way to achieve this is to provide the source code
+download from the same server where the program is running.
+
+========================================================================
+
+For the complete text of the AGPLv3, visit:
+https://www.gnu.org/licenses/agpl-3.0.en.html

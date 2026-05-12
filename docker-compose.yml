@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  wolfbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wolfbot
+    restart: unless-stopped
+    environment:
+      # Discord Bot Token (REQUIRED - set in .env file)
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      # Owner ID (REQUIRED - set in .env file)
+      OWNER_ID: ${OWNER_ID}
+      # Optional settings
+      DEBUG: ${DEBUG:-false}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      # Mount database directory to persist data between container restarts
+      - wolfbot_data:/app/data
+      # Optional: mount .env from host for easy configuration changes
+      - ./.env:/app/.env:ro
+    networks:
+      - wolfbot-network
+
+  # Optional: Web Dashboard Service
+  # Uncomment to enable the web dashboard on port 5000
+  # dashboard:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dashboard
+  #   container_name: wolfbot-dashboard
+  #   restart: unless-stopped
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     WEB_ADMIN_TOKEN: ${WEB_ADMIN_TOKEN:-change-me}
+  #     DEBUG: ${DEBUG:-false}
+  #   volumes:
+  #     - wolfbot_data:/app/data:ro
+  #   networks:
+  #     - wolfbot-network
+  #   depends_on:
+  #     - wolfbot
+
+volumes:
+  wolfbot_data:
+    driver: local
+
+networks:
+  wolfbot-network:
+    driver: bridge
