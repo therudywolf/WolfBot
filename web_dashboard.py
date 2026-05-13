@@ -182,39 +182,48 @@ HTML_TEMPLATE = """
     <title>WolfBot Dashboard</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #667eea; --secondary: #764ba2; --success: #49cc90; --info: #61affe; --danger: #f93e3e; --light: #f5f5f5; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #333;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             overflow: hidden;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 40px 20px;
+            padding: clamp(30px, 5vw, 50px) 20px;
             text-align: center;
         }
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .header p { font-size: 1.1em; opacity: 0.9; }
+        .header h1 { font-size: clamp(1.8em, 5vw, 2.8em); margin-bottom: 10px; font-weight: 700; }
+        .header p { font-size: clamp(0.95em, 2vw, 1.15em); opacity: 0.95; }
         .content {
-            padding: 40px;
+            padding: clamp(20px, 5vw, 40px);
         }
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
         .section h2 {
-            color: #333;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
+            color: #222;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 12px;
             margin-bottom: 20px;
+            font-size: clamp(1.3em, 3vw, 1.8em);
+            font-weight: 600;
         }
         .stats-grid {
             display: grid;
@@ -223,51 +232,82 @@ HTML_TEMPLATE = """
             margin-bottom: 30px;
         }
         .stat-card {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-        .stat-card h3 { color: #667eea; margin-bottom: 10px; }
-        .stat-card p { font-size: 2em; font-weight: bold; color: #333; }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15); }
+        .stat-card h3 { color: var(--primary); margin-bottom: 12px; font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-card p { font-size: 2.2em; font-weight: 700; color: #222; }
         .api-docs {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            font-family: 'Courier New', 'Monaco', monospace;
             overflow-x: auto;
         }
         .endpoint {
             background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-left: 4px solid #667eea;
+            padding: 18px;
+            margin: 12px 0;
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
+        .endpoint:hover { box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1); }
+        .endpoint code { font-size: 0.9em; color: #d63384; }
         .method {
             display: inline-block;
-            padding: 4px 8px;
-            background: #667eea;
+            padding: 6px 12px;
             color: white;
-            border-radius: 4px;
+            border-radius: 5px;
             margin-right: 10px;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .method.get { background: #61affe; }
-        .method.post { background: #49cc90; }
-        .method.delete { background: #f93e3e; }
+        .method.get { background: var(--info); }
+        .method.post { background: var(--success); }
+        .method.delete { background: var(--danger); }
+        .method.put { background: #ff9f43; }
+        .warning {
+            background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+            border: 2px solid #ffc107;
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            color: #856404;
+        }
+        .warning strong { color: #d39e00; }
+        .warning code { background: rgba(0,0,0,0.08); padding: 2px 6px; border-radius: 3px; }
         footer {
-            background: #f5f5f5;
-            padding: 20px;
+            background: var(--light);
+            padding: 25px 20px;
             text-align: center;
             color: #666;
-            border-top: 1px solid #ddd;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9em;
         }
-        .warning {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
+        footer a { color: var(--primary); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+        footer a:hover { color: var(--secondary); text-decoration: underline; }
+        pre {
+            background: white;
             padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+        @media (max-width: 768px) {
+            .content { padding: 20px; }
+            .header h1 { font-size: 2em; }
+            .endpoint { padding: 14px; }
+            .stats-grid { gap: 15px; }
         }
     </style>
 </head>

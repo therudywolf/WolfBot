@@ -12,8 +12,8 @@ from typing import Optional
 from datetime import timezone
 from discord.ui import View, Button
 
-# Подключение к базе данных SQLite
-conn = sqlite3.connect('bot_database.db')
+# Подключение к базе данных SQLite (потокобезопасно)
+conn = sqlite3.connect('bot_database.db', check_same_thread=False)
 cursor = conn.cursor()
 
 # Создаем необходимые таблицы, если их нет
