@@ -1,8 +1,22 @@
 # WolfBot 🐺
 
+> `D34D1N$1D3` :: BMW • Racing • Dead inside wolf :: Discord bot ecosystem
+
+My resources:
+- [Gravatar](https://gravatar.com/therudywolf)
+- [OneToThree](https://onetothree.ru)
+- [Forest blog](https://t.me/theforestserver)
+- [X](https://x.com/therudywolf)
+- [GitHub](https://github.com/therudywolf)
+- [Twitch](https://twitch.tv/therudywolf)
+- [Reddit](https://reddit.com/user/Most-Watercress-6718)
+- [Telegram](https://t.me/rudy_wolf)
+- [YouTube](https://youtube.com/channel/UCXHkoSlaY5QaNmN_l4t0djQ)
+
 A feature-rich Discord bot written in Python with comprehensive statistics, user profiles, achievements, and more.
 
 **License:** GNU Affero General Public License v3 (AGPLv3) - See [LICENSE](LICENSE) for details.
+AGPL v3 Copyleft applies to reuse, modification, and network deployment of derived versions.
 
 ## Features
 
