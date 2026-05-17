@@ -87,7 +87,7 @@ The bot will run in a container with automatic restarts.
 ```bash
 docker build -t wolfbot .
 docker run -d --name wolfbot \
-  -e DISCORD_TOKEN=your_webadmin_token \
+  -e DISCORD_TOKEN=your_discord_bot_token \
   -e OWNER_ID=your-id \
   -v wolfbot_data:/app/data \
   wolfbot
