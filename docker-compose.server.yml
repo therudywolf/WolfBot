@@ -1,0 +1,21 @@
+name: wolfbot
+
+# deathwolf — WolfBot Discord bot. Adopted from a manual `docker run` orphan
+# into a managed stack on its own bridge network (off the default bridge).
+# The image (wolfbot:latest) is prebuilt; its config is baked into the image.
+# Source code: https://github.com/therudywolf/WolfBot (this dir is deploy-only).
+services:
+  wolfbot:
+    image: wolfbot
+    container_name: deathwolf
+    command: ["python", "wolfbot.py"]
+    restart: unless-stopped
+    networks:
+      - default
+    cpu_shares: 256
+    mem_limit: 128m
+    mem_reservation: 32m
+
+networks:
+  default:
+    driver: bridge
