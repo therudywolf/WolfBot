@@ -9,6 +9,10 @@ services:
     image: wolfbot
     container_name: deathwolf
     command: ["python", "wolfbot.py"]
+    environment:
+      # База — в томе wolfbot_data (/app/data), а не в слое контейнера.
+      # Тот же путь ставит Dockerfile; здесь он записан явно для деплоя.
+      DATABASE_PATH: /app/data/bot_database.db
     restart: unless-stopped
     networks:
       - default

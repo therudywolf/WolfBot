@@ -12,8 +12,13 @@ from typing import Optional
 from datetime import timezone
 from discord.ui import View, Button
 
-# Подключение к базе данных SQLite (потокобезопасно)
-conn = sqlite3.connect('bot_database.db', check_same_thread=False)
+# Подключение к базе данных SQLite (потокобезопасно).
+# Путь берём из DATABASE_PATH: Dockerfile ставит /app/data/bot_database.db,
+# то есть файл в томе. Относительный 'bot_database.db' клал базу в слой
+# контейнера, и любое его пересоздание стирало её. Значение по умолчанию —
+# для запуска без Docker, как и в web_dashboard.py.
+DATABASE_PATH = os.getenv('DATABASE_PATH', 'bot_database.db')
+conn = sqlite3.connect(DATABASE_PATH, check_same_thread=False)
 cursor = conn.cursor()
 
 # Создаем необходимые таблицы, если их нет
