@@ -23,9 +23,8 @@ services:
     security_opt: [no-new-privileges:true]
     cap_drop: [ALL]
     cap_add: [DAC_READ_SEARCH]
-    read_only: true
-    tmpfs:
-      - /tmp:noexec,nosuid,nodev,size=64m
+    # no read_only/tmpfs on purpose: ops/backup.sh does `docker exec ... sqlite3 backup to /tmp/bot_database.db` + `docker cp deathwolf:/tmp/...`,
+    # and docker cp cannot read files from a tmpfs mount
     pids_limit: 128
     oom_score_adj: 300
     cpus: 0.5
