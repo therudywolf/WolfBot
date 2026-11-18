@@ -19,6 +19,21 @@ services:
     cpu_shares: 256
     mem_limit: 128m
     mem_reservation: 32m
+    # hardening 2026-11
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    cap_add: [DAC_READ_SEARCH]
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,nodev,size=64m
+    pids_limit: 128
+    oom_score_adj: 300
+    cpus: 0.5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   default:
